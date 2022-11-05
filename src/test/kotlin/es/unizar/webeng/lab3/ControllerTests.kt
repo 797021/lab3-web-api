@@ -1,11 +1,10 @@
 package es.unizar.webeng.lab3
 
+import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.slot
 import io.mockk.verify
-
-import com.ninjasquad.springmockk.MockkBean
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -60,7 +59,7 @@ class ControllerTests {
         } andThenAnswer {
             employee.captured.copy(id = 2)
         }
-      
+
         mvc.post("/employees") {
             contentType = MediaType.APPLICATION_JSON
             content = MANAGER_REQUEST_BODY("Mary")
@@ -91,7 +90,6 @@ class ControllerTests {
         verify(exactly = 2) {
             employeeRepository.save(Employee("Mary", "Manager"))
         }
-
     }
 
     @Test
@@ -139,7 +137,6 @@ class ControllerTests {
             employeeRepository.save(any())
             employeeRepository.deleteById(any())
         }
-
     }
 
     @Test
@@ -191,7 +188,6 @@ class ControllerTests {
         verify(exactly = 2) {
             employeeRepository.save(Employee("Tom", "Manager", 1))
         }
-
     }
 
     @Test
@@ -222,6 +218,5 @@ class ControllerTests {
         verify(exactly = 1) {
             employeeRepository.deleteById(1)
         }
-
     }
 }
